@@ -1,0 +1,124 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build outputs
+*.o
+*.a
+*.lo
+*.la
+*.lai
+*.gox
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+*_cgo_main.c
+*.cgo1.*
+*.cgo2.*
+
+# Go vendor
+/vendor/
+/Godeps/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test binaries
+*.test
+
+# Coverage output
+*.cover
+*.cov
+coverage.out
+
+# Build artifacts
+bin/
+dist/
+
+# Go workspace stuff
+go.work
+go.work.sum
+
+# Exclude your shortcuts folder
+shortcuts/
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build outputs
+*.o
+*.a
+*.lo
+*.la
+*.lai
+*.gox
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+*_cgo_main.c
+*.cgo1.*
+*.cgo2.*
+
+# Go vendor
+/vendor/
+/Godeps/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test binaries
+*.test
+
+# Coverage output
+*.cover
+*.cov
+coverage.out
+
+# Build artifacts
+bin/
+dist/
+
+# Go workspace stuff
+go.work
+go.work.sum
+
+# Exclude your shortcuts folder
+shortcuts/

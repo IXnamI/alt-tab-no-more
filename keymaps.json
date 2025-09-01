@@ -1,0 +1,14 @@
+[
+  {
+    "keybind": "<leader>1",
+    "mapped": "Tab 1"
+  },
+  {
+    "keybind": "<leader>2",
+    "mapped": "Tab 2"
+  },
+  {
+    "keybind": "<leader>3",
+    "mapped": "Opera"
+  }
+]
