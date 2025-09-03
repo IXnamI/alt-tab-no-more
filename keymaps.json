@@ -1,14 +1,26 @@
 [
   {
     "keybind": "<leader>1",
-    "mapped": "Tab 1"
+    "settings": {
+      "type": "Terminal",
+      "winName": "Tab_1",
+      "args": []
+    }
   },
   {
     "keybind": "<leader>2",
-    "mapped": "Tab 2"
+    "settings": {
+      "type": "Terminal",
+      "winName": "Tab_2",
+      "args": []
+    }
   },
   {
     "keybind": "<leader>3",
-    "mapped": "Opera"
+    "settings": {
+      "type": "Terminal",
+      "winName": "Tab_3",
+      "args": []
+    }
   }
 ]
