@@ -3,11 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"golang.org/x/sys/windows"
 	"io"
 	"os"
 	"os/exec"
+	"strings"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 type Keymap struct {
@@ -149,8 +151,59 @@ func extractKeybindMappingFromFile() {
 		fmt.Println("Could not load keymap into buffer")
 	}
 	var keymappings []Keymap
-	json.Unmarshal(byteValue, &keymappings)
+	err = json.Unmarshal(byteValue, &keymappings)
+	if err != nil {
+		fmt.Println("Could not parse JSON keymap")
+		return
+	}
 	for i := range len(keymappings) {
+		bindSetting := keymappings[i].BindSetting
+		keybind := keymappings[i].KeyBind
+		keybindType := parseKeybindType(bindSetting.ApplicationType)
+		fmt.Println("KeybindType:", keybindType)
 		fmt.Printf("Keybind: %s, mapped to application: %s\n", keymappings[i].KeyBind, keymappings[i].BindSetting)
+		stringKeybind, err := parseKeybind(keybind)
+		fmt.Printf("String keybind: %s\n", stringKeybind)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		switch keybindType {
+		case Terminal:
+			tk := &TerminalKeybind{
+				kType:         parseKeybindType(bindSetting.ApplicationType),
+				windowName:    bindSetting.WindowName,
+				designatedKey: stringKeybind,
+				args:          bindSetting.Args,
+			}
+			keybindMappings[stringKeybind] = tk
+		case App:
+			tk := &AppKeybind{
+				kType:         parseKeybindType(bindSetting.ApplicationType),
+				execPath:      bindSetting.ApplicationPath,
+				designatedKey: stringKeybind,
+				args:          bindSetting.Args,
+			}
+			keybindMappings[stringKeybind] = tk
+		}
+	}
+}
+
+func parseKeybind(keybind string) (string, error) {
+	keybindWithoutLeader, found := strings.CutPrefix(keybind, "<leader>")
+	if !found {
+		fmt.Errorf("Could not parse keybind")
+		return "", fmt.Errorf("Could not parse keybind")
+	}
+	return keybindWithoutLeader, nil
+}
+
+func parseKeybindType(kType string) KeybindType {
+	lowercase := strings.ToLower(kType)
+	switch lowercase {
+	case "terminal":
+		return Terminal
+	default:
+		return App
 	}
 }

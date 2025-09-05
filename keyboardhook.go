@@ -56,14 +56,18 @@ func hookProc(nCode int32, wParam uintptr, lParam uintptr) uintptr {
 			isLeaderPressed = false
 			keyPressed := convertVkToStringInput(vk)
 			if keybind, ok := keybindMappings[keyPressed]; ok {
-				hwnd, err := keybind.Open()
-				if err != nil {
-					fmt.Println("Error: ", err)
-					return 1
+				if appHwnd, ok := appHandles[keyPressed]; ok {
+					forceForeground(appHwnd)
+				} else {
+					hwnd, err := keybind.Open()
+					if err != nil {
+						fmt.Println("Error: ", err)
+						return 1
+					}
+					appHandles[keyPressed] = hwnd
 				}
-				appHandles[keyPressed] = hwnd
 			}
-			switch vk {
+			/* switch vk {
 			case uint32(Key_1):
 				if _, err := focusWT("Tab_1"); err != nil {
 					fmt.Println("Error:", err)
@@ -90,7 +94,7 @@ func hookProc(nCode int32, wParam uintptr, lParam uintptr) uintptr {
 				}
 			default:
 				return 1
-			}
+			} */
 			return 1
 		}
 	}

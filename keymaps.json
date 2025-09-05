@@ -18,8 +18,8 @@
   {
     "keybind": "<leader>3",
     "settings": {
-      "type": "Terminal",
-      "winName": "Tab_3",
+      "type": "App",
+      "path": "shortcuts/",
       "args": []
     }
   }
